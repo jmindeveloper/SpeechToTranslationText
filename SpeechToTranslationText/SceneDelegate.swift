@@ -7,6 +7,7 @@
 
 import UIKit
 import AVFoundation
+import SwiftGoogleTranslate
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -15,9 +16,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let scene = (scene as? UIWindowScene) else { return }
-        
+        setAudioSession()
         window = UIWindow(windowScene: scene)
         let rootVC = SpeechViewController()
+        
+        SwiftGoogleTranslate.shared.start(with: googleCloudAPIKey)
         
         window?.rootViewController = rootVC
         window?.makeKeyAndVisible()

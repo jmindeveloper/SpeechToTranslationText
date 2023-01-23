@@ -9,6 +9,7 @@ import UIKit
 import AVFoundation
 import Speech
 import SnapKit
+import SwiftGoogleTranslate
 
 class SpeechViewController: UIViewController {
 
@@ -22,6 +23,7 @@ class SpeechViewController: UIViewController {
         let button = UIButton()
         button.setTitle("말하기", for: .normal)
         button.setTitleColor(.label, for: .normal)
+        button.setTitleColor(.lightGray, for: .highlighted)
         
         return button
     }()
@@ -32,6 +34,14 @@ class SpeechViewController: UIViewController {
         label.textColor = .label
         
         return label
+    }()
+    
+    private let copyButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "doc.on.doc.fill"), for: .normal)
+        button.tintColor = .lightGray
+        
+        return button
     }()
     
     private let speechTextView: UITextView = {
@@ -59,6 +69,7 @@ class SpeechViewController: UIViewController {
     private func connectTarget() {
         speechButton.addTarget(self, action: #selector(startSpeech(_:)), for: .touchDown)
         speechButton.addTarget(self, action: #selector(stopSpeech(_:)), for: .touchUpInside)
+        copyButton.addTarget(self, action: #selector(copyLabel(_:)), for: .touchUpInside)
     }
     
     @objc private func startSpeech(_ sender: UIButton) {
@@ -71,6 +82,10 @@ class SpeechViewController: UIViewController {
         print("stop speech")
         stopSpeechTimer()
         stopAudioEngine()
+    }
+    
+    @objc private func copyLabel(_ sender: UIButton) {
+        UIPasteboard.general.string = speechTextView.text
     }
     
     // MARK: - Method
@@ -112,8 +127,19 @@ class SpeechViewController: UIViewController {
                 guard let self = self else { return }
                 var isFinal = false
                 if result != nil {
-                    self.speechTextView.text = result?.bestTranscription.formattedString
+                    let sttResult = result?.bestTranscription.formattedString
                     
+                    SwiftGoogleTranslate.shared.translate(
+                        sttResult ?? "",
+                        "en",
+                        "ko") { [weak self] text, error in
+                            if let error = error {
+                                print(error.localizedDescription)
+                            }
+                            DispatchQueue.main.async {
+                                self?.speechTextView.text = text
+                            }
+                        }
                     isFinal = result!.isFinal
                 }
                 
@@ -153,7 +179,7 @@ class SpeechViewController: UIViewController {
     private func setSubViews() {
         view.backgroundColor = .systemBackground
         
-        [speechButton, speechTimeLabel, speechTextView].forEach {
+        [speechButton, speechTimeLabel, speechTextView, copyButton].forEach {
             view.addSubview($0)
         }
         
@@ -175,6 +201,12 @@ class SpeechViewController: UIViewController {
             $0.horizontalEdges.equalToSuperview().inset(16)
             $0.top.equalTo(speechTimeLabel.snp.bottom).offset(20)
             $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-16)
+        }
+        
+        copyButton.snp.makeConstraints {
+            $0.trailing.equalTo(speechTextView.snp.trailing)
+            $0.centerY.equalTo(speechTimeLabel)
+            $0.size.equalTo(40)
         }
     }
 }
