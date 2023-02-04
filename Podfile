@@ -7,5 +7,8 @@ target 'SpeechToTranslationText' do
 
   # Pods for SpeechToTranslationText
   pod 'SwiftGoogleTranslate'
+  pod 'GoogleMLKit/TextRecognition', '3.2.0'
+  pod 'GoogleMLKit/TextRecognitionJapanese', '3.2.0'
+  pod 'GoogleMLKit/TextRecognitionKorean', '3.2.0'
 
 end

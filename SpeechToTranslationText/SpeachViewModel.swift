@@ -85,7 +85,6 @@ final class SpeechViewModel: NSObject {
             } catch {
                 print(error.localizedDescription)
             }
-//            speechTextView.text = "뭐라는거임ㅡㅡ"
             textPublihser.send("뭐라는거임ㅡㅡ")
         }
     }

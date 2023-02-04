@@ -6,10 +6,7 @@
 //
 
 import UIKit
-import AVFoundation
-import Speech
 import SnapKit
-import SwiftGoogleTranslate
 import Combine
 
 class SpeechViewController: UIViewController {
@@ -200,8 +197,4 @@ class SpeechViewController: UIViewController {
             $0.size.equalTo(40)
         }
     }
-}
-
-extension SpeechViewController: SFSpeechRecognizerDelegate {
-    
 }
