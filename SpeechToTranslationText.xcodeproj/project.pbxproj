@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E599883298E31ED007DD60F /* SpeachViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E599882298E31ED007DD60F /* SpeachViewModel.swift */; };
 		0E737976297E8A4300A94912 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E737975297E8A4300A94912 /* AppDelegate.swift */; };
 		0E737978297E8A4300A94912 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E737977297E8A4300A94912 /* SceneDelegate.swift */; };
 		0E73797A297E8A4300A94912 /* SpeechViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E737979297E8A4300A94912 /* SpeechViewController.swift */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0E599882298E31ED007DD60F /* SpeachViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeachViewModel.swift; sourceTree = "<group>"; };
 		0E737972297E8A4300A94912 /* SpeechToTranslationText.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpeechToTranslationText.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E737975297E8A4300A94912 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0E737977297E8A4300A94912 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 				0E737975297E8A4300A94912 /* AppDelegate.swift */,
 				0E737977297E8A4300A94912 /* SceneDelegate.swift */,
 				0E737979297E8A4300A94912 /* SpeechViewController.swift */,
+				0E599882298E31ED007DD60F /* SpeachViewModel.swift */,
 				0E73797B297E8A4300A94912 /* Main.storyboard */,
 				0E73797E297E8A4400A94912 /* Assets.xcassets */,
 				0E737980297E8A4400A94912 /* LaunchScreen.storyboard */,
@@ -217,6 +220,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E599883298E31ED007DD60F /* SpeachViewModel.swift in Sources */,
 				0E73797A297E8A4300A94912 /* SpeechViewController.swift in Sources */,
 				0E737976297E8A4300A94912 /* AppDelegate.swift in Sources */,
 				0ED4B422297E99C600FE40DB /* APIKEY.swift in Sources */,
@@ -377,6 +381,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -407,6 +412,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

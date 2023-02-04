@@ -10,14 +10,41 @@ import AVFoundation
 import Speech
 import SnapKit
 import SwiftGoogleTranslate
+import Combine
 
 class SpeechViewController: UIViewController {
 
-    private let speechRecognizer = SFSpeechRecognizer(locale: .init(identifier: "ko"))
-    private var speechRequest: SFSpeechAudioBufferRecognitionRequest?
-    private var speechTask: SFSpeechRecognitionTask?
+    private let inputLanguageLabel: UILabel = {
+        let label = UILabel()
+        label.text = "한국어"
+        
+        return label
+    }()
     
-    private let audioEngine = AVAudioEngine()
+    private let outputLanguageLabel: UILabel = {
+        let label = UILabel()
+        label.text = "일본어"
+        
+        return label
+    }()
+    
+    private let toggleButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "arrow.right"), for: .normal)
+        button.setImage(UIImage(systemName: "arrow.left"), for: .selected)
+        button.tintColor = .label
+        
+        return button
+    }()
+    
+    private let languageStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .fill
+        stackView.spacing = 10
+        
+        return stackView
+    }()
     
     private let speechButton: UIButton = {
         let button = UIButton()
@@ -57,12 +84,14 @@ class SpeechViewController: UIViewController {
     
     private var speechTimer: Timer?
     private var speechTimeCount: Int = 0
+    private let viewModel = SpeechViewModel()
+    private var subscriptions = Set<AnyCancellable>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        speechRecognizer?.delegate = self
         setSubViews()
         connectTarget()
+        binding()
     }
     
     // MARK: - Target
@@ -70,18 +99,24 @@ class SpeechViewController: UIViewController {
         speechButton.addTarget(self, action: #selector(startSpeech(_:)), for: .touchDown)
         speechButton.addTarget(self, action: #selector(stopSpeech(_:)), for: .touchUpInside)
         copyButton.addTarget(self, action: #selector(copyLabel(_:)), for: .touchUpInside)
+        toggleButton.addTarget(self, action: #selector(toggleButtonAction(_:)), for: .touchUpInside)
+    }
+    
+    @objc private func toggleButtonAction(_ sender: UIButton) {
+        sender.isSelected.toggle()
+        viewModel.toggleLanguage()
     }
     
     @objc private func startSpeech(_ sender: UIButton) {
         print("start speech")
         startSpeechTimer()
-        runAudioEngine()
+        viewModel.runAudioEngine()
     }
     
     @objc private func stopSpeech(_ sender: UIButton) {
         print("stop speech")
         stopSpeechTimer()
-        stopAudioEngine()
+        viewModel.stopAudioEngine()
     }
     
     @objc private func copyLabel(_ sender: UIButton) {
@@ -89,6 +124,13 @@ class SpeechViewController: UIViewController {
     }
     
     // MARK: - Method
+    private func binding() {
+        viewModel.textPublihser
+            .sink { [weak self] text in
+                self?.speechTextView.text = text
+            }.store(in: &subscriptions)
+    }
+    
     private func startSpeechTimer() {
         if speechTimer != nil { return }
         speechTimeCount = 0
@@ -111,82 +153,31 @@ class SpeechViewController: UIViewController {
         return "\(min):\(sec)"
     }
     
-    func runAudioEngine() {
-        if !audioEngine.isRunning {
-            if speechTask != nil {
-                speechTask?.cancel()
-                speechTask = nil
-            }
-            
-            speechRequest = SFSpeechAudioBufferRecognitionRequest()
-            guard let speechRequest = speechRequest else { return }
-            let inputNode = audioEngine.inputNode
-            speechRequest.shouldReportPartialResults = true
-            
-            speechTask = speechRecognizer?.recognitionTask(with: speechRequest, resultHandler: { [weak self] result, error in
-                guard let self = self else { return }
-                var isFinal = false
-                if result != nil {
-                    let sttResult = result?.bestTranscription.formattedString
-                    
-                    SwiftGoogleTranslate.shared.translate(
-                        sttResult ?? "",
-                        "en",
-                        "ko") { [weak self] text, error in
-                            if let error = error {
-                                print(error.localizedDescription)
-                            }
-                            DispatchQueue.main.async {
-                                self?.speechTextView.text = text
-                            }
-                        }
-                    isFinal = result!.isFinal
-                }
-                
-                if error != nil || isFinal {
-                    self.audioEngine.stop()
-                    inputNode.removeTap(onBus: 0)
-                    
-                    self.speechRequest = nil
-                    self.speechTask = nil
-                }
-            })
-            
-            let recordingFormat = inputNode.outputFormat(forBus: 0)
-            inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { [weak self] buffer, time in
-                self?.speechRequest?.append(buffer)
-            }
-            
-            audioEngine.prepare()
-            
-            do {
-                try audioEngine.start()
-            } catch {
-                print(error.localizedDescription)
-            }
-            speechTextView.text = "뭐라는거임ㅡㅡ"
-        }
-    }
-    
-    func stopAudioEngine() {
-        if audioEngine.isRunning {
-            audioEngine.stop()
-            speechRequest?.endAudio()
-        }
-    }
-    
     // MARK: - SetView
     private func setSubViews() {
         view.backgroundColor = .systemBackground
         
-        [speechButton, speechTimeLabel, speechTextView, copyButton].forEach {
+        [languageStackView, speechButton, speechTimeLabel, speechTextView, copyButton].forEach {
             view.addSubview($0)
+        }
+        
+        [inputLanguageLabel, toggleButton, outputLanguageLabel].forEach {
+            languageStackView.addArrangedSubview($0)
         }
         
         setConstraints()
     }
     
     private func setConstraints() {
+        languageStackView.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        toggleButton.snp.makeConstraints {
+            $0.size.equalTo(40)
+        }
+        
         speechButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(100)
