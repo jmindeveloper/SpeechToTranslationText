@@ -22,7 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         SwiftGoogleTranslate.shared.start(with: googleCloudAPIKey)
         
-        window?.rootViewController = rootVC
+        window?.rootViewController = UINavigationController(rootViewController: rootVC)
         window?.makeKeyAndVisible()
     }
     

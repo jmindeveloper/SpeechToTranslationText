@@ -11,11 +11,12 @@
 		0E737976297E8A4300A94912 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E737975297E8A4300A94912 /* AppDelegate.swift */; };
 		0E737978297E8A4300A94912 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E737977297E8A4300A94912 /* SceneDelegate.swift */; };
 		0E73797A297E8A4300A94912 /* SpeechViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E737979297E8A4300A94912 /* SpeechViewController.swift */; };
-		0E73797D297E8A4300A94912 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E73797B297E8A4300A94912 /* Main.storyboard */; };
 		0E73797F297E8A4400A94912 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E73797E297E8A4400A94912 /* Assets.xcassets */; };
 		0E737982297E8A4400A94912 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E737980297E8A4400A94912 /* LaunchScreen.storyboard */; };
 		0E73798B297E8A5D00A94912 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0E73798A297E8A5D00A94912 /* SnapKit */; };
 		0ED4B422297E99C600FE40DB /* APIKEY.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED4B421297E99C600FE40DB /* APIKEY.swift */; };
+		0EE4F29B298E6308002D45EC /* ImageTranstlationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE4F29A298E6308002D45EC /* ImageTranstlationViewController.swift */; };
+		0EE4F29D298E6843002D45EC /* ImageRecognitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE4F29C298E6843002D45EC /* ImageRecognitionManager.swift */; };
 		44D389D544D25E8A746DB5FF /* Pods_SpeechToTranslationText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE34D607D0C2429D6FB45311 /* Pods_SpeechToTranslationText.framework */; };
 /* End PBXBuildFile section */
 
@@ -25,11 +26,12 @@
 		0E737975297E8A4300A94912 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0E737977297E8A4300A94912 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		0E737979297E8A4300A94912 /* SpeechViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechViewController.swift; sourceTree = "<group>"; };
-		0E73797C297E8A4300A94912 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0E73797E297E8A4400A94912 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0E737981297E8A4400A94912 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0E737983297E8A4400A94912 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0ED4B421297E99C600FE40DB /* APIKEY.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKEY.swift; sourceTree = "<group>"; };
+		0EE4F29A298E6308002D45EC /* ImageTranstlationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTranstlationViewController.swift; sourceTree = "<group>"; };
+		0EE4F29C298E6843002D45EC /* ImageRecognitionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRecognitionManager.swift; sourceTree = "<group>"; };
 		9DA9CF1EBB6FC835115F5B13 /* Pods-SpeechToTranslationText.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpeechToTranslationText.debug.xcconfig"; path = "Target Support Files/Pods-SpeechToTranslationText/Pods-SpeechToTranslationText.debug.xcconfig"; sourceTree = "<group>"; };
 		CE34D607D0C2429D6FB45311 /* Pods_SpeechToTranslationText.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SpeechToTranslationText.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9B5AD0182A3F1824162185E /* Pods-SpeechToTranslationText.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpeechToTranslationText.release.xcconfig"; path = "Target Support Files/Pods-SpeechToTranslationText/Pods-SpeechToTranslationText.release.xcconfig"; sourceTree = "<group>"; };
@@ -72,8 +74,9 @@
 				0E737975297E8A4300A94912 /* AppDelegate.swift */,
 				0E737977297E8A4300A94912 /* SceneDelegate.swift */,
 				0E737979297E8A4300A94912 /* SpeechViewController.swift */,
+				0EE4F29A298E6308002D45EC /* ImageTranstlationViewController.swift */,
+				0EE4F29C298E6843002D45EC /* ImageRecognitionManager.swift */,
 				0E599882298E31ED007DD60F /* SpeachViewModel.swift */,
-				0E73797B297E8A4300A94912 /* Main.storyboard */,
 				0E73797E297E8A4400A94912 /* Assets.xcassets */,
 				0E737980297E8A4400A94912 /* LaunchScreen.storyboard */,
 				0E737983297E8A4400A94912 /* Info.plist */,
@@ -150,7 +153,7 @@
 			);
 			mainGroup = 0E737969297E8A4300A94912;
 			packageReferences = (
-				0E737989297E8A5D00A94912 /* XCRemoteSwiftPackageReference "SnapKit.git" */,
+				0E737989297E8A5D00A94912 /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = 0E737973297E8A4300A94912 /* Products */;
 			projectDirPath = "";
@@ -168,7 +171,6 @@
 			files = (
 				0E737982297E8A4400A94912 /* LaunchScreen.storyboard in Resources */,
 				0E73797F297E8A4400A94912 /* Assets.xcassets in Resources */,
-				0E73797D297E8A4300A94912 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -241,7 +243,9 @@
 				0E599883298E31ED007DD60F /* SpeachViewModel.swift in Sources */,
 				0E73797A297E8A4300A94912 /* SpeechViewController.swift in Sources */,
 				0E737976297E8A4300A94912 /* AppDelegate.swift in Sources */,
+				0EE4F29B298E6308002D45EC /* ImageTranstlationViewController.swift in Sources */,
 				0ED4B422297E99C600FE40DB /* APIKEY.swift in Sources */,
+				0EE4F29D298E6843002D45EC /* ImageRecognitionManager.swift in Sources */,
 				0E737978297E8A4300A94912 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -249,14 +253,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		0E73797B297E8A4300A94912 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0E73797C297E8A4300A94912 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		0E737980297E8A4400A94912 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -393,7 +389,9 @@
 				DEVELOPMENT_TEAM = 8PRV428ULN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SpeechToTranslationText/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "ㅇㅇ";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "마이크좀 씀ㅇㅇ";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "ㅇㅇㅇㅇㅇ";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -424,7 +422,9 @@
 				DEVELOPMENT_TEAM = 8PRV428ULN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SpeechToTranslationText/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "ㅇㅇ";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "마이크좀 씀ㅇㅇ";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "ㅇㅇㅇㅇㅇ";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -468,7 +468,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		0E737989297E8A5D00A94912 /* XCRemoteSwiftPackageReference "SnapKit.git" */ = {
+		0E737989297E8A5D00A94912 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
 			requirement = {
@@ -481,7 +481,7 @@
 /* Begin XCSwiftPackageProductDependency section */
 		0E73798A297E8A5D00A94912 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 0E737989297E8A5D00A94912 /* XCRemoteSwiftPackageReference "SnapKit.git" */;
+			package = 0E737989297E8A5D00A94912 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
 		};
 /* End XCSwiftPackageProductDependency section */

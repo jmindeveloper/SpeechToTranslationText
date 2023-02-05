@@ -68,6 +68,14 @@ class SpeechViewController: UIViewController {
         return button
     }()
     
+    private let cameraButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "camera"), for: .normal)
+        button.tintColor = .label
+        
+        return button
+    }()
+    
     private let speechTextView: UITextView = {
         let textView = UITextView()
         textView.layer.borderColor = UIColor.lightGray.cgColor
@@ -97,6 +105,7 @@ class SpeechViewController: UIViewController {
         speechButton.addTarget(self, action: #selector(stopSpeech(_:)), for: .touchUpInside)
         copyButton.addTarget(self, action: #selector(copyLabel(_:)), for: .touchUpInside)
         toggleButton.addTarget(self, action: #selector(toggleButtonAction(_:)), for: .touchUpInside)
+        cameraButton.addTarget(self, action: #selector(cameraButtonAction(_:)), for: .touchUpInside)
     }
     
     @objc private func toggleButtonAction(_ sender: UIButton) {
@@ -118,6 +127,11 @@ class SpeechViewController: UIViewController {
     
     @objc private func copyLabel(_ sender: UIButton) {
         UIPasteboard.general.string = speechTextView.text
+    }
+    
+    @objc private func cameraButtonAction(_ sender: UIButton) {
+        let vc = ImageTranstlationViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     // MARK: - Method
@@ -153,8 +167,9 @@ class SpeechViewController: UIViewController {
     // MARK: - SetView
     private func setSubViews() {
         view.backgroundColor = .systemBackground
+        navigationItem.title = "speech"
         
-        [languageStackView, speechButton, speechTimeLabel, speechTextView, copyButton].forEach {
+        [languageStackView, speechButton, speechTimeLabel, speechTextView, copyButton, cameraButton].forEach {
             view.addSubview($0)
         }
         
@@ -193,6 +208,12 @@ class SpeechViewController: UIViewController {
         
         copyButton.snp.makeConstraints {
             $0.trailing.equalTo(speechTextView.snp.trailing)
+            $0.centerY.equalTo(speechTimeLabel)
+            $0.size.equalTo(40)
+        }
+        
+        cameraButton.snp.makeConstraints {
+            $0.leading.equalTo(speechTextView.snp.leading)
             $0.centerY.equalTo(speechTimeLabel)
             $0.size.equalTo(40)
         }
