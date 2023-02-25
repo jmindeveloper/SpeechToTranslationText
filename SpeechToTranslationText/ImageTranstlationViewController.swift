@@ -98,6 +98,14 @@ final class ImageTranstlationViewController: UIViewController {
         }
     }
     
+    func fixImageOrientation(_ image: UIImage) -> UIImage {
+        UIGraphicsBeginImageContext(image.size)
+        image.draw(at: .zero)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage ?? image
+    }
+    
     // MARK: - UI
     private func setNavigationBarButtonItem() {
         let cameraButton = UIBarButtonItem(
@@ -146,7 +154,9 @@ extension ImageTranstlationViewController: UIImagePickerControllerDelegate {
         guard let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else {
             return
         }
-        imageView.image = selectedImage
+//        let cgImage = selectedImage.cgImage
+//        imageView.image = UIImage(cgImage: cgImage!, scale: 1, orientation: selectedImage.imageOrientation)
+        imageView.image = fixImageOrientation(selectedImage)
         clear()
     }
 }
@@ -161,7 +171,9 @@ extension ImageTranstlationViewController: PHPickerViewControllerDelegate {
                 guard let selectedImage = selectedImage as? UIImage else { return }
                 DispatchQueue.main.async {
                     print(selectedImage)
-                    self?.imageView.image = selectedImage
+//                    let cgImage = selectedImage.cgImage
+//                    self?.imageView.image = UIImage(cgImage: cgImage!, scale: 1, orientation: selectedImage.imageOrientation)
+                    self?.imageView.image = self?.fixImageOrientation(selectedImage)
                     self?.clear()
                 }
             }
